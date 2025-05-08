@@ -11,4 +11,4 @@ sudo apt install python3-pip
 
 sudo python3 -m pip install --upgrade pip setuptools
 
-sudo python3 -m pip install norminette"
+sudo python3 -m pip install norminette
