@@ -6,11 +6,11 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/08 00:34:28 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:17:42 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx.h"
+#include "../inc/so_long.h"
 
 int	main(void)
 {

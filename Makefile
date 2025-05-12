@@ -6,11 +6,18 @@ CFLAGS = -Wall -Werror -Wextra
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MLX_DIR = mlx
+ifeq ($(shell name), Linux)
+	INCLUDES = -I/usr/include -Imlx
+else
+	INCLUDES = -I/opt/X11/include -Imlx
+endif
+
+MLX_DIR = ./mlx
+MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
 ifeq ($(shell uname -s), Linux)
     MLXFLAGS = -L$(MLX_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lft -lXext -lX11 -lm -lz
 else
-    MLXFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lz
+    MLXFLAGS = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lz
 endif
 
 REMOVE = rm -f
@@ -36,7 +43,7 @@ YELLOW = \033[0;33m
 CYAN = \033[0;36m
 RESET = \033[0m
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(MLX_LIB) $(NAME)
 	@echo "$(GREEN)Compilation successfully done!!$(RESET)"
 
 $(LIBFT):
@@ -47,12 +54,17 @@ $(NAME): $(OBJS)
 	@echo "$(YELLOW)Compiling MiniLibX...$(RESET)"
 	$(MAKE) -C $(MLX_DIR)
 	@echo "$(CYAN)Linking so_long...$(RESET)"
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLXFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLXFLAGS)
 	@echo "$(GREEN)so_long executable created successfully!$(RESET)"
 
 %.o: %.c
 	@echo "$(CYAN)Compiling $<...$(RESET)"
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
+
+$(MLX_LIB):
+	@echo "$(YELLOW)Compiling MiniLibX...$(RESET)"
+	$(MAKE) -C $(MLX_DIR)
+
 
 clean:
 	@echo "$(YELLOW)Cleaning object files...$(RESET)"
