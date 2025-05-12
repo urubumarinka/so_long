@@ -6,31 +6,55 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/12 16:17:42 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/12 18:47:19 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
+int	destroy_win(t_data *data)
+{
+	mlx_destroy_window(data->mlx_con, data->mlx_win);
+	mlx_destroy_display(data->mlx_con);
+	free(data->mlx_con);
+	data->mlx_con = NULL;
+	exit(0);
+	return (0);
+}
+
+int	keypress(int keycode, t_data *data)
+{
+	if (keycode == XK_Escape)
+		destroy_win(data);
+	else if(keycode == XK_Up)
+		printf("Up key pressed\n");
+	else if(keycode == XK_Down)
+		printf("Down key pressed\n");
+	else if(keycode == XK_Left)
+		printf("Left key pressed\n");
+	else if(keycode == XK_Right)
+		printf("Right key pressed\n");
+	else
+		printf("Key %d pressed\n", keycode);
+	return (0);
+}
+
 int	main(void)
 {
-	void	*mlx_connetion;
-	void	*mlx_window;
+	t_data	data;
 
-	mlx_connection = mlx_init();
-	if (mlx_connection == NULL)
-		return (MALLOC_ERROR);
-	mlx_window = mlx_new_window(mlx_connection, WIDTH, HEIGHT, "Hello World");
-	if (mlx_window == NULL)
-	{
-		mlx_destroy_display(mlx_connection);
-		free(mlx_connection); // prt:
-		return (MALLOC_ERROR);
-	}
-mlx_put_image_to_window(mlx_conection, mlx_window, 400, 300, 0xFF0000); // put a red pixel on center of window
-	mlx_loop(mlx_connection);
-
-	mlx_destroy_display(mlx_connection);
-	free(mlx_connection);
-	mlx_connetion = NULL; // should I here also free the pointer form inside minilibx struct?
+	data.mlx_con = mlx_init();
+	if (!data.mlx_con)
+		return (1);
+	data.mlx_win = mlx_new_window(data.mlx_con, WIDTH, HEIGHT, "Hello");
+	if (!data.mlx_win)
+		return (free(data.mlx_con), data.mlx_con = NULL, 1);
+	//mlx_put_image_to_window(mlx_connection, mlx_window, 400, 300, 0xFF0000); // put a red pixel on center of window
+	//Register key release hook
+	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keypress, &data);
+	// Register destroy hook
+	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, &destroy_win, &data);
+	// loop over the MLX pointer
+	mlx_loop(data.mlx_con);
+	return (0);
 }

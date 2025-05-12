@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/12 16:16:11 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/12 18:20:38 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,19 @@
 #define HEIGHT 600
 #define TILE 32
 
-//#include <mlx.h> // include minilibX header
+#include <mlx.h> // include minilibX header
+#include <stdlib.h> // include standard library header
+#include <stdio.h>
+#include <X11/X.h> // include X11 header for X11 events
+#include <X11/keysym.h> // include X11 keysym header for key events
 
-# endif SO_LONG_H
+typedef struct s_data
+{
+	void		*mlx_con; // MLX pointer
+	void		*mlx_win; // MLX window pointer
+	void		*textures[5]; // MLX image pointers (on the stack)
+	//t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
+}	t_data;
+
+#endif
 
