@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/12 18:47:19 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:19:52 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,9 @@ int	main(void)
 	data.mlx_win = mlx_new_window(data.mlx_con, WIDTH, HEIGHT, "Hello");
 	if (!data.mlx_win)
 		return (free(data.mlx_con), data.mlx_con = NULL, 1);
-	//mlx_put_image_to_window(mlx_connection, mlx_window, 400, 300, 0xFF0000); // put a red pixel on center of window
-	//Register key release hook
-	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keypress, &data);
-	// Register destroy hook
-	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, &destroy_win, &data);
-	// loop over the MLX pointer
-	mlx_loop(data.mlx_con);
+	load_img(&data);
+	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keypress, &data); //Register key release hook
+	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, &destroy_win, &data); // Register destroy hook
+	mlx_loop(data.mlx_con); // loop over the MLX pointer
 	return (0);
 }

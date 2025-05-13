@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/13 14:04:12 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:33:14 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 #define TILE 32
 
 // Textures path definitions
-# define PATH_CAT "../assets/cat.xpm"
-# define PATH_CHICKEN "../assets/chicken.xpm"
-# define PATH_FARMTILE "../assets/farmTile.xpm"
-# define PATHGRASS "../assets/grass.xpm"
-# define PATH_HOUSE "../assets/house.xpm"
+# define PATH_CAT "assets/cat.xpm"
+# define PATH_CHICKEN "assets/chicken.xpm"
+# define PATH_FARMTILE "assets/farm_tile.xpm"
+# define PATHGRASS "assets/grass.xpm"
+# define PATH_HOUSE "assets/house.xpm"
 
 #include <mlx.h> // include minilibX header
 #include <stdlib.h> // include standard library header
@@ -39,5 +39,9 @@ typedef struct s_data
 	//t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
 }	t_data;
 
+
+// My Functions prototypes
+
+void	load_img(t_data *data);
 #endif
 

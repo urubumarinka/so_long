@@ -17,7 +17,7 @@ MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
 ifeq ($(shell uname -s), Linux)
     MLXFLAGS = -L$(MLX_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lft -lXext -lX11 -lm -lz
 else
-    MLXFLAGS = -L$(MLX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lz
+    MLXFLAGS = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lz
 endif
 
 REMOVE = rm -f
@@ -29,6 +29,7 @@ $(SRC_DIR)main.c \
 $(SRC_DIR)map_parsing.c \
 $(SRC_DIR)player_movement.c \
 $(SRC_DIR)game_loop.c \
+$(SRC_DIR)load_img.c \
 
 #$(SRC_DIR)check_path.c \
 	$(SRC_DIR)clean_and_exit.c \
@@ -77,6 +78,7 @@ fclean: clean
 	@echo "$(YELLOW)Removing executables...$(RESET)"
 	$(REMOVE) $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	if [ -d "./mlx" ]; then make -C $(MLX_DIR) clean; fi
 
 re: fclean all
 
