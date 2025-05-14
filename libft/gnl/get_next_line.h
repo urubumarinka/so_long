@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:33:29 by maborges          #+#    #+#             */
-/*   Updated: 2025/03/06 22:36:40 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/14 19:08:55 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,22 @@
 # include <fcntl.h> /* for read() flags*/
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif
 
 # include <stdlib.h> /* free and malloc */
+# include "../libft.h"
 
 char		*get_next_line(int fd);
 char		*ft_read_file(char *stash, int fd);
 char		*extract_line(char *stash);
 char		*leftover(char *stash);
-void		*ft_calloc(size_t nmemb, size_t size);
-void		*ft_memset(void *s, int c, size_t n);
-char		*ft_strchr(const char *s, int c);
-size_t		ft_strlen(const char *s);
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strdup(const char *s);
+//void		*ft_calloc(size_t nmemb, size_t size);
+//void		*ft_memset(void *s, int c, size_t n);
+//char		*ft_strchr(const char *s, int c);
+//size_t		ft_strlen(const char *s);
+//char		*ft_strjoin(char const *s1, char const *s2);
+//char		*ft_strdup(const char *s);
 char		*free_and_null(char **str);
 
 #endif

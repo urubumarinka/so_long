@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:26:38 by maborges          #+#    #+#             */
-/*   Updated: 2024/12/03 16:16:15 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:17:21 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include "gnl/get_next_line.h"
 
 //MY FUNCTIONS
 

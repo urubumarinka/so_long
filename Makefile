@@ -6,19 +6,13 @@ CFLAGS = -Wall -Werror -Wextra
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-ifeq ($(shell name), Linux)
-	INCLUDES = -I/usr/include -Imlx
-else
-	INCLUDES = -I/opt/X11/include -Imlx
-endif
+
+INCLUDES = -I/usr/include -Imlx
 
 MLX_DIR = ./mlx
 MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
-ifeq ($(shell uname -s), Linux)
-    MLXFLAGS = -L$(MLX_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lft -lXext -lX11 -lm -lz
-else
-    MLXFLAGS = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit -lz
-endif
+
+MLXFLAGS = -L$(MLX_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lft -lXext -lX11 -lm -lz
 
 REMOVE = rm -f
 
