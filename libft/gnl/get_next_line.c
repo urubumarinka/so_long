@@ -6,35 +6,19 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:32:43 by maborges          #+#    #+#             */
-/*   Updated: 2025/03/06 22:39:34 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:59:02 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*get_next_line(int fd)
-{
-	static char		*stash;
-	char			*line;
+static char	*ft_read_file(char *stash, int fd);
+static char	*extract_line(char *stash);
+static char	*leftover(char *stash);
+static char	*free_and_null(char **str);
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (free_and_null(&stash));
-	if (!stash)
-		stash = ft_calloc(1, sizeof(char));
-	if (!stash)
-		return (NULL);
-	stash = ft_read_file(stash, fd);
-	if (!stash || *stash == '\0')
-		return (free_and_null(&stash));
-	line = extract_line(stash);
-	if (!line)
-		return (free_and_null(&stash));
-	stash = leftover(stash);
-	return (line);
-}
-
-char	*ft_read_file(char *stash, int fd)
+static char	*ft_read_file(char *stash, int fd)
 {
 	char		*tmpbuff;
 	int			bytes_read;
@@ -62,7 +46,7 @@ char	*ft_read_file(char *stash, int fd)
 	return (stash);
 }
 
-char	*extract_line(char *stash)
+static char	*extract_line(char *stash)
 {
 	char	*extracted_line;
 	int		i;
@@ -89,7 +73,7 @@ char	*extract_line(char *stash)
 	return (extracted_line);
 }
 
-char	*leftover(char *stash)
+static char	*leftover(char *stash)
 {
 	char	*remaining_line;
 	char	*newstash;
@@ -111,10 +95,31 @@ char	*leftover(char *stash)
 	return (NULL);
 }
 
-char	*free_and_null(char **str)
+static char	*free_and_null(char **str)
 {
 	if (*str)
-		free(*str);
+	free(*str);
 	*str = NULL;
 	return (NULL);
+}
+
+char	*get_next_line(int fd)
+{
+	static char		*stash;
+	char			*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (free_and_null(&stash));
+	if (!stash)
+		stash = ft_calloc(1, sizeof(char));
+	if (!stash)
+		return (NULL);
+	stash = ft_read_file(stash, fd);
+	if (!stash || *stash == '\0')
+		return (free_and_null(&stash));
+	line = extract_line(stash);
+	if (!line)
+		return (free_and_null(&stash));
+	stash = leftover(stash);
+	return (line);
 }

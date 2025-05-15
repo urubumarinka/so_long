@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 14:13:26 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/13 18:37:59 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:08:17 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,9 @@ void	load_img(t_data *data)
 
 	// Check if all textures were loaded successfully
 	while (i < 5)
-	{
-		if (!data->textures[i])
-		{
-			fprintf(stderr, "Error: Failed to load texture %d\n", i);
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
+		if (!data->textures[i++])
+			error_handler("Error: Failed to load texture");
+
 	// Display the loaded image in the window
 	mlx_put_image_to_window(data->mlx_con, data->mlx_win, data->textures[0], 0, 0);
 	mlx_put_image_to_window(data->mlx_con, data->mlx_win, data->textures[1], 32, 0);
@@ -41,4 +36,5 @@ void	load_img(t_data *data)
 	mlx_put_image_to_window(data->mlx_con, data->mlx_win, data->textures[3], 96, 0);
 	mlx_put_image_to_window(data->mlx_con, data->mlx_win, data->textures[4], 128, 0);
 }
+
 

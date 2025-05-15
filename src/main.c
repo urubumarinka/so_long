@@ -6,36 +6,13 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/14 19:19:22 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:04:59 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	free_map(t_map *map)
-{
-	int	i = 0;
-
-	while (map->grid && map->grid[i])
-	{
-		free(map->grid[i]);
-		i++;
-	}
-	free(map->grid);
-	map->grid = NULL;
-}
-int	destroy_win(t_data *data)
-{
-	mlx_destroy_window(data->mlx_con, data->mlx_win);
-	mlx_destroy_display(data->mlx_con);
-	free_map(&data->map);
-	free(data->mlx_con);
-	data->mlx_con = NULL;
-	exit(0);
-	return (0);
-}
-
-int	keypress(int keycode, t_data *data)
+static int	keypress(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
 		destroy_win(data);
@@ -55,19 +32,12 @@ int	keypress(int keycode, t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	int	i;
+	int		i;
 
 	if(ac != 2)
-	{
-		printf("usage: %s <map-file.ber>\n", av[0]);
-		return (1);
-	}
+		error_handler("usage: ./so_long <map-file.ber>\n");
 	if(!load_map(av[1], &data.map))
-	{
-		printf("Error: Failed to load map\n");
-		return (1);
-	}
-
+		error_handler("Map loading failed\n");
 	i = 0;
 	while(i < data.map.height)
 	{
@@ -77,7 +47,6 @@ int	main(int ac, char **av)
 			printf("NULL\n");
 		i++;
 	}
-
 	data.mlx_con = mlx_init();
 	if (!data.mlx_con)
 		return (free_map(&data.map), 1);
@@ -86,7 +55,7 @@ int	main(int ac, char **av)
 		return (free_map(&data.map), free(data.mlx_con), data.mlx_con = NULL, 1);
 	load_img(&data);
 	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keypress, &data); //Register key release hook
-	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, &destroy_win, &data); // Register destroy hook
+	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, destroy_win, &data); // Register destroy hook
 	mlx_loop(data.mlx_con); // loop over the MLX pointer
 	return (0);
 }

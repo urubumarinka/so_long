@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/14 19:03:53 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:04:45 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,21 @@ typedef struct s_data
 }	t_data;
 
 
-
 // My Functions prototypes
-
 // Images
 void	load_img(t_data *data);
 
 // Map parsing
 int		load_map(char *file, t_map *map); // open the file
+int	check_map_elements(t_map *map); // check for P, E, C
 //int		read_map(int fd, t_map *map); // use get_next_line to read lines
 //int		validate_map(t_map *map); // check rectangular shape, borders, allowed characters
 void	free_map(t_map *map); // for cleanup
+
+//Free and error handling
+void	error_handler(const char *message);
+void	free_map(t_map *map);
+int		destroy_win(t_data *data);
+
 #endif
 

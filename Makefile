@@ -21,15 +21,11 @@ SRC_DIR = src/
 SRCS = \
 $(SRC_DIR)main.c \
 $(SRC_DIR)map_parsing.c \
+$(SRC_DIR)map_parsing_utils.c \
 $(SRC_DIR)player_movement.c \
 $(SRC_DIR)game_loop.c \
 $(SRC_DIR)load_img.c \
-
-#$(SRC_DIR)check_path.c \
-	$(SRC_DIR)clean_and_exit.c \
-	$(SRC_DIR)init_images.c \
-	$(SRC_DIR)put_img.c \
-	$(SRC_DIR)read_map.c
+$(SRC_DIR)frees_and_errors.c \
 
 OBJS = $(SRCS:.c=.o)
 
