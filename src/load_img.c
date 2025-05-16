@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 14:13:26 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/16 19:44:18 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:48:56 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	draw_tile(t_data *data, int row, int col)
 
 void	load_img(t_data *data)
 {
-	//int	tile;
-	//int	h;
+	int	w;
+	int	h;
 	int	i;
 	int	j;
 
 	// Load textures from XPM files
-	data->cat.img = mlx_xpm_file_to_image(data->ptr, PATH_CAT, , &h);
+	data->cat.img = mlx_xpm_file_to_image(data->ptr, PATH_CAT, &w, &h);
 	data->chicken.img = mlx_xpm_file_to_image(data->ptr, PATH_C, &w, &h);
 	data->wall.img = mlx_xpm_file_to_image(data->ptr, PATH_W, &w, &h);
 	data->grass.img = mlx_xpm_file_to_image(data->ptr, PATH_G, &w, &h);
