@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 14:13:26 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/16 19:48:56 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:09:09 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	draw_tile(t_data *data, int row, int col)
 	int	x;
 	int	y;
 
-	x = row * TILE;
-	y = col * TILE;
+	x = col * TILE;
+	y = row * TILE;
 
 	mlx_put_image_to_window(data->ptr, data->win, data->grass.img, x, y);
 	if (data->map.grid[row][col] == '1')

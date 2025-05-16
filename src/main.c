@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/16 19:38:34 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:16:25 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	main(int ac, char **av)
 	data.ptr = mlx_init();
 	if (!data.ptr)
 		return (free_map(&data.map), 1);
-	data.win = mlx_new_window(data.ptr, (data.map.width - 1) * TILE,
-			(data.map.height + 1) * TILE, "So Long");
+	data.win = mlx_new_window(data.ptr, data.map.width * TILE,
+			data.map.height * TILE, "So Long");
 	if (!data.win)
 		return (free_map(&data.map), free(data.ptr), data.ptr = NULL, 1);
 	load_img(&data);

@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:24:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/16 17:41:37 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:14:10 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	fill_grid(int fd, t_map *map, int line_count)
 	i = 0;
 	while (line)
 	{
-		map->grid[i] = ft_strtrim(line, "\n");
+		map->grid[i] = ft_strtrim(line, "\r\n");
 		if (!map->grid[i])
 			return (0);
 		free(line);
@@ -57,6 +57,8 @@ static int	fill_grid(int fd, t_map *map, int line_count)
 		map->width = ft_strlen(map->grid[0]);
 	else
 		map->width = 0;
+	printf("Width: %d\n", map->width);
+	printf("height: %d\n", map->height);
 	return (1);
 }
 
