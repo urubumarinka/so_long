@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:24:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/15 18:05:48 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:41:37 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ static int	count_lines(int fd)
 	int		count;
 
 	count = 0;
-	while (get_next_line(fd))
+	line = get_next_line(fd);
+	while (line)
 	{
-		line = get_next_line(fd);
 		if (!line)
 			return (0);
 		free(line);
 		count++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (count);
@@ -33,22 +34,29 @@ static int	count_lines(int fd)
 static int	fill_grid(int fd, t_map *map, int line_count)
 {
 	char	*line;
-	int		i = 0;
+	int		i;
 
 	map->grid = malloc(sizeof(char *) * (line_count + 1));
 	if (!map->grid)
 		return (0);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	i = 0;
+	while (line)
 	{
 		map->grid[i] = ft_strtrim(line, "\n");
-		free(line);
 		if (!map->grid[i])
 			return (0);
+		free(line);
+		line = NULL;
 		i++;
+		line = get_next_line(fd);
 	}
 	map->grid[i] = NULL;
 	map->height = line_count;
-	map->width = ft_strlen(map->grid[0]);
+	if (map->grid[0])
+		map->width = ft_strlen(map->grid[0]);
+	else
+		map->width = 0;
 	return (1);
 }
 
@@ -64,13 +72,13 @@ static int	map_validation(t_map *map, int line_count)
 			error_handler("Map is not rectangular");
 	i = -1;
 	while (++i < map->width)
-		if (map->grid[0][i] != '1' || map->grid[line_count - 1][i] != 1)
+		if (map->grid[0][i] != '1' || map->grid[line_count - 1][i] != '1')
 			error_handler("Map borders are not valid");
 	i = -1;
-	while(++i < line_count)
-		if(map->grid[i][0] != '1' || map->grid[i][map->width - 1] != '1')
+	while (++i < line_count)
+		if (map->grid[i][0] != '1' || map->grid[i][map->width - 1] != '1')
 			error_handler("Map borders are not valid");
-	return(1);
+	return (1);
 
 }
 
@@ -93,6 +101,5 @@ int	load_map(char *file, t_map *map)
 		return (0);
 	if (!check_map_elements(map))
 		return (0);
-	printf("Map loaded with %d lines.\n", line_count); //tirar isso dps
 	return (1);
 }

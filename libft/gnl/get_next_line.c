@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:32:43 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/15 17:59:02 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:20:03 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char	*leftover(char *stash)
 static char	*free_and_null(char **str)
 {
 	if (*str)
-	free(*str);
+		free(*str);
 	*str = NULL;
 	return (NULL);
 }

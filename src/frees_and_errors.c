@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:45:56 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/15 18:13:13 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 18:46:50 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	error_handler(const char *message)
 
 void	free_map(t_map *map)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (map->grid && map->grid[i])
 	{
 		free(map->grid[i]);
@@ -30,13 +31,14 @@ void	free_map(t_map *map)
 	free(map->grid);
 	map->grid = NULL;
 }
+
 int	destroy_win(t_data *data)
 {
-	mlx_destroy_window(data->mlx_con, data->mlx_win);
-	mlx_destroy_display(data->mlx_con);
+	mlx_destroy_window(data->ptr, data->win);
+	mlx_destroy_display(data->ptr);
 	free_map(&data->map);
-	free(data->mlx_con);
-	data->mlx_con = NULL;
+	free(data->ptr);
+	data->ptr = NULL;
 	exit(0);
 	return (0);
 }

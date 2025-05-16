@@ -1,7 +1,7 @@
 /* XPM */
 static char * house_xpm[] = {
 "23 32 258 2",
-"  	c None",
+"  	c #3E8948",
 ". 	c #854F3F",
 "+ 	c #864F3F",
 "@ 	c #91533B",

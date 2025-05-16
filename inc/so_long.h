@@ -6,36 +6,33 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/15 18:04:45 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:46:04 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SO_LONG_H
+#ifndef SO_LONG_H
 # define SO_LONG_H
 
-// DIsplay size definitions
-#define WIDTH 800
-#define HEIGHT 600
-#define TILE 32
+# define TILE 32
 
 // Textures path definitions
 # define PATH_CAT "assets/cat.xpm"
-# define PATH_CHICKEN "assets/chicken.xpm"
-# define PATH_FARMTILE "assets/farm_tile.xpm"
-# define PATHGRASS "assets/grass.xpm"
-# define PATH_HOUSE "assets/house.xpm"
+# define PATH_C "assets/chicken.xpm"
+# define PATH_W "assets/farm_tile.xpm"
+# define PATH_G "assets/grass.xpm"
+# define PATH_H "assets/house.xpm"
 
-#include <mlx.h> // include minilibX header
-#include <stdlib.h> // include standard library header
-#include <stdio.h> // remove later when linking ft_printf
-#include <X11/X.h> // include X11 header for X11 events
-#include <X11/keysym.h> // include X11 keysym header for key events
-#include "../libft/libft.h"
+# include <mlx.h> // include minilibX header
+# include <stdlib.h> // include standard library header
+# include <stdio.h> // remove later when linking ft_printf
+# include <X11/X.h> // include X11 header for X11 events
+# include <X11/keysym.h> // include X11 keysym header for key events
+# include "../libft/libft.h"
 //#include "../printf/inc/ft_printf.h" // still need to link on my makefile
 
 typedef struct s_map
 {
-	char	**grid; // 2D array of map
+	char	**grid;
 	int		width;
 	int		height;
 	int		player_count;
@@ -43,11 +40,29 @@ typedef struct s_map
 	int		collectible_count;
 }	t_map;
 
+typedef struct s_img
+{
+	void	*img; // MLX image pointer
+	int		width; // Image width
+	int		height; // Image height
+} t_img;
+
+typedef struct s_player
+{
+	int		x; // Player x position
+	int		y; // Player y position
+	int		moves;
+} t_player;
+
 typedef struct s_data
 {
-	void		*mlx_con; // MLX pointer
-	void		*mlx_win; // MLX window pointer
-	void		*textures[5]; // MLX image pointers (on the stack)
+	void		*ptr; // MLX pointer
+	void		*win; // MLX window pointer
+	t_img		grass;
+	t_img		cat;
+	t_img		wall;
+	t_img		chicken;
+	t_img		house; // MLX image pointers (on the stack)
 	t_map		map; // Map pointer (contains map details - preferably kept on the stack)
 }	t_data;
 

@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/15 18:04:59 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:38:34 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,29 @@ int	main(int ac, char **av)
 	t_data	data;
 	int		i;
 
-	if(ac != 2)
+	if (ac != 2)
 		error_handler("usage: ./so_long <map-file.ber>\n");
-	if(!load_map(av[1], &data.map))
+	if (!load_map(av[1], &data.map))
 		error_handler("Map loading failed\n");
 	i = 0;
-	while(i < data.map.height)
+	while (i < data.map.height)
 	{
-		if(data.map.grid[i])
+		if (data.map.grid[i])
 			printf("%s\n", data.map.grid[i]);
 		else
 			printf("NULL\n");
 		i++;
 	}
-	data.mlx_con = mlx_init();
-	if (!data.mlx_con)
+	data.ptr = mlx_init();
+	if (!data.ptr)
 		return (free_map(&data.map), 1);
-	data.mlx_win = mlx_new_window(data.mlx_con, WIDTH, HEIGHT, "Hello");
-	if (!data.mlx_win)
-		return (free_map(&data.map), free(data.mlx_con), data.mlx_con = NULL, 1);
+	data.win = mlx_new_window(data.ptr, (data.map.width - 1) * TILE,
+			(data.map.height + 1) * TILE, "So Long");
+	if (!data.win)
+		return (free_map(&data.map), free(data.ptr), data.ptr = NULL, 1);
 	load_img(&data);
-	mlx_hook(data.mlx_win, KeyRelease, KeyReleaseMask, keypress, &data); //Register key release hook
-	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, destroy_win, &data); // Register destroy hook
-	mlx_loop(data.mlx_con); // loop over the MLX pointer
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, keypress, &data); //Register key release hook
+	mlx_hook(data.win, DestroyNotify, StructureNotifyMask, destroy_win, &data); // Register destroy hook
+	mlx_loop(data.ptr); // loop over the MLX pointer
 	return (0);
 }
