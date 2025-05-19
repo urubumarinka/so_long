@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:11:20 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/19 20:30:22 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:39:58 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,43 +45,26 @@ static void	try_move(t_data *data, int new_x, int new_y)
 	data->player.moves++;
 	printf("Moves: %d\n", data->player.moves);
 	// Draw both positions
-	//draw_tile(data, data->player.y, data->player.x);
+	draw_tile(data, data->player.y, data->player.x);
 	draw_tile(data, new_y, new_x);
 }
 
 
 int	keypress(int keycode, t_data *data)
 {
-	int	new_x;
-	int	new_y;
-
 	if (keycode == XK_Escape)
 		destroy_win(data);
 	else if (keycode == 65362) // Up arrow key
 	{
 		printf("Up arrow key pressed\n");
-		new_x = data->player.x;
-		new_y = data->player.y - 1;
-		try_move(data, new_x, new_y);
+		try_move(data, data->player.x, data->player.y - 1);
 	}
 	else if (keycode == 65364) // Down arrow key
-	{
-		new_x = data->player.x;
-		new_y = data->player.y + 1;
-		try_move(data, new_x, new_y);
-	}
+		try_move(data, data->player.x, data->player.y + 1);
 	else if (keycode == 65361) // Left arrow key
-	{
-		new_x = data->player.x - 1;
-		new_y = data->player.y;
-		try_move(data, new_x, new_y);
-	}
+		try_move(data, data->player.x - 1, data->player.y);
 	else if (keycode == 65363) // Right arrow key
-	{
-		new_x = data->player.x + 1;
-		new_y = data->player.y;
-		try_move(data, new_x, new_y);
-	}
+		try_move(data, data->player.x + 1, data->player.y);
 	else
 		printf("Key %d pressed\n", keycode);
 	return (0);
