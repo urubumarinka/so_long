@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:24:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/19 14:16:56 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:50:22 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	fill_grid(int fd, t_map *map, int line_count)
 	i = 0;
 	while (line)
 	{
-		map->grid[i] = ft_strtrim(line, "\r\n");
+		map->grid[i] = ft_strtrim(line, "\n");
 		if (!map->grid[i])
 			return (0);
 		free(line);
@@ -99,9 +99,9 @@ int	load_map(char *file, t_map *map)
 	if (!fill_grid(fd, map, line_count))
 		return (0);
 	close(fd);
-	if (!map_validation(map, line_count))
-		return (0);
 	if (!check_map_elements(map))
+		return (0);
+	if (!map_validation(map, line_count))
 		return (0);
 	if (!validate_map_path(map))
 		return (error_handler("Map is not valid"), 0);
