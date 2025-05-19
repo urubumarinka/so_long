@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:11:20 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/19 18:43:26 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:52:56 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@ static void	try_move(t_data *data, int new_x, int new_y)
 	if (new_x < 0 || new_x >= data->map.width
 		|| new_y < 0 || new_y >= data->map.height)
 		return ;
+	printf("try_move called with new_x=%d, new_y=%d\n", new_x, new_y);
 	next_tile = data->map.grid[new_y][new_x];
 	if (next_tile == '1')
 		return ;
-	else if (next_tile == 'C')
+	if (next_tile == 'C')
 	{
 		data->player.collected++;
-		data->map.grid[new_y][new_x] = '0';
+		//data->map.grid[new_y][new_x] = '0';
 	}
-	else if (next_tile == 'E')
+	if (next_tile == 'E')
 	{
 		if (data->player.collected == data->map.total_collect)
 		{
 			printf("You won in %d moves!\n", ++data->player.moves); //trocar ft_printf
 			destroy_win(data);
+			return ;
 		}
 	}
 	draw_tile(data, data->player.y, data->player.x);

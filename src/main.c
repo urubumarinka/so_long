@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/19 18:20:16 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:02:29 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 	if (!data.win)
 		return (free_map(&data.map), free(data.ptr), data.ptr = NULL, 1);
 	load_img(&data);
-	mlx_key_hook(data.win, keypress, &data); //Register key hook
+	mlx_hook(data.win, 2, 1L<<0, keypress, &data); //Register key hook
 	mlx_hook(data.win, DestroyNotify, StructureNotifyMask, destroy_win, &data); // Register destroy hook
 	mlx_loop(data.ptr); // loop over the MLX pointer
 	return (0);
