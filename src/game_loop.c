@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:11:20 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/19 20:01:43 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:30:22 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,51 @@ static void	try_move(t_data *data, int new_x, int new_y)
 			return ;
 		}
 	}
-	draw_tile(data, data->player.y, data->player.x);
-	printf("Player at row=%d col=%d\n", data->player.y, data->player.x);
+	// First update the grid at old position
 	data->map.grid[data->player.y][data->player.x] = '0';
 	data->player.x = new_x;
 	data->player.y = new_y;
 	data->map.grid[new_y][new_x] = 'P';
 	data->player.moves++;
-	printf("Moves: %d\n", data->player.moves); //trocar ft_printf
+	printf("Moves: %d\n", data->player.moves);
+	// Draw both positions
+	//draw_tile(data, data->player.y, data->player.x);
 	draw_tile(data, new_y, new_x);
 }
 
 
 int	keypress(int keycode, t_data *data)
 {
+	int	new_x;
+	int	new_y;
+
 	if (keycode == XK_Escape)
 		destroy_win(data);
 	else if (keycode == 65362) // Up arrow key
 	{
 		printf("Up arrow key pressed\n");
-		try_move(data, data->player.x, data->player.y - 1);
+		new_x = data->player.x;
+		new_y = data->player.y - 1;
+		try_move(data, new_x, new_y);
 	}
 	else if (keycode == 65364) // Down arrow key
-		try_move(data, data->player.x, data->player.y + 1);
+	{
+		new_x = data->player.x;
+		new_y = data->player.y + 1;
+		try_move(data, new_x, new_y);
+	}
 	else if (keycode == 65361) // Left arrow key
-		try_move(data, data->player.x - 1, data->player.y);
+	{
+		new_x = data->player.x - 1;
+		new_y = data->player.y;
+		try_move(data, new_x, new_y);
+	}
 	else if (keycode == 65363) // Right arrow key
-		try_move(data, data->player.x + 1, data->player.y);
+	{
+		new_x = data->player.x + 1;
+		new_y = data->player.y;
+		try_move(data, new_x, new_y);
+	}
 	else
 		printf("Key %d pressed\n", keycode);
 	return (0);
