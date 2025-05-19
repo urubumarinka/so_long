@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:24:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/16 20:14:10 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:16:56 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ int	load_map(char *file, t_map *map)
 		return (0);
 	if (!check_map_elements(map))
 		return (0);
+	if (!validate_map_path(map))
+		return (error_handler("Map is not valid"), 0);
 	return (1);
 }
