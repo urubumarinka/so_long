@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 14:13:26 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/19 19:44:31 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:53:06 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_tile(t_data *data, int row, int col)
 		mlx_put_image_to_window(data->ptr, data->win, data->cat.img, x, y);
 	else if (data->map.grid[row][col] == 'C')
 		mlx_put_image_to_window(data->ptr, data->win, data->chicken.img, x, y);
-	}
+}
 
 void	load_img(t_data *data)
 {
@@ -38,7 +38,6 @@ void	load_img(t_data *data)
 	int	i;
 	int	j;
 
-	// Load textures from XPM files
 	data->cat.img = mlx_xpm_file_to_image(data->ptr, PATH_CAT, &w, &h);
 	data->chicken.img = mlx_xpm_file_to_image(data->ptr, PATH_C, &w, &h);
 	data->wall.img = mlx_xpm_file_to_image(data->ptr, PATH_W, &w, &h);
@@ -51,17 +50,12 @@ void	load_img(t_data *data)
 		while (j < data->map.width)
 		{
 			draw_tile(data, i, j);
-			/* for (int row = 0; row < data->map.height; row++)
-				printf("%s\n", data->map.grid[row]); */
 			j++;
 		}
 		i++;
 		j = 0;
 	}
-/* 	for (int row = 0; row < data->map.height; row++)
-		for (int col = 0; col < data->map.width; col++)
-			draw_tile(data, row, col); */
-
 }
+
 
 

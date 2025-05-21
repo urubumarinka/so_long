@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:25:03 by maborges          #+#    #+#             */
-/*   Updated: 2025/01/27 17:29:04 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:17:47 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdio.h> // lembrar de tirar
+
+# include "../../libft.h"
 
 int			ft_printf(const char *__format, ...);
 int			ft_putnbr(int n);

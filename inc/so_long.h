@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/21 13:11:11 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:20:35 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <X11/X.h> // include X11 header for X11 events
 # include <X11/keysym.h> // include X11 keysym header for key events
 # include "../libft/libft.h"
-//#include "../printf/inc/ft_printf.h" // still need to link on my makefile
+# include "../libft/ft_printf/inc/ft_printf.h"
 
 typedef struct s_player
 {

@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 17:44:02 by maborges          #+#    #+#             */
-/*   Updated: 2024/11/28 18:28:49 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:09:58 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s)
 	char	*tmps1;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (s[i] != '\0')
 		i++;
 	tmps1 = (char *) malloc(i * sizeof(char) + 1);

@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:45:56 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/21 13:17:30 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:47:23 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_handler(const char *message)
 {
-	printf("Error: %s\n", message); // change to ft_printf
+	ft_printf("Error: %s\n", message);
 	exit(EXIT_FAILURE);
 }
 
