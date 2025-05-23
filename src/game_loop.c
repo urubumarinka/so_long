@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:11:20 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 18:15:26 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 20:00:39 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	try_move(t_data *data, int new_x, int new_y)
 			destroy_win(data);
 			return ;
 		}
-		else
-			return ;
+		/* else
+			return ; */
 	}
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
 	draw_tile(data, data->map.player.y, data->map.player.x);
