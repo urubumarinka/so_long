@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/21 17:20:35 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:02:49 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@
 
 typedef struct s_player
 {
-	int		x; // Player x position
-	int		y; // Player y position
+	int		x;
+	int		y;
 	int		moves;
 	int		collected;
-} t_player;
+}	t_player;
 
 typedef struct s_map
 {
@@ -50,24 +50,22 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void	*img; // MLX image pointer
-	int		width; // Image width
-	int		height; // Image height
-} t_img;
-
+	void	*img;
+	int		width;
+	int		height;
+}	t_img;
 
 typedef struct s_data
 {
-	void		*ptr; // MLX pointer
-	void		*win; // MLX window pointer
+	void		*ptr;
+	void		*win;
 	t_img		grass;
 	t_img		cat;
 	t_img		wall;
 	t_img		chicken;
-	t_img		house; // MLX image pointers (on the stack)
-	t_map		map; // Map pointer (contains map details - preferably kept on the stack)
+	t_img		house;
+	t_map		map;
 }	t_data;
-
 
 // My Functions prototypes
 // Images
@@ -75,10 +73,8 @@ void	load_img(t_data *data);
 void	draw_tile(t_data *data, int row, int col);
 
 // Map parsing
-int		load_map(char *file, t_map *map); // open the file
-int	check_map_elements(t_map *map); // check for P, E, C
-//int		read_map(int fd, t_map *map); // use get_next_line to read lines
-//int		validate_map(t_map *map); // check rectangular shape, borders, allowed characters
+int		load_map(char *file, t_map *map);
+int		check_map_elements(t_map *map);
 int		validate_map_path(t_map *map);
 
 //Free and error handling
@@ -87,10 +83,8 @@ void	free_map(t_map *map);
 int		destroy_win(t_data *data);
 void	free_images(t_data *data);
 
-
 //Game Logic
-int	keypress(int keycode, t_data *data);
-
+int		keypress(int keycode, t_data *data);
 
 #endif
 
