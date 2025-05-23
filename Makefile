@@ -22,7 +22,6 @@ SRCS = \
 $(SRC_DIR)main.c \
 $(SRC_DIR)map_parsing.c \
 $(SRC_DIR)map_parsing_utils.c \
-$(SRC_DIR)player_movement.c \
 $(SRC_DIR)game_loop.c \
 $(SRC_DIR)load_img.c \
 $(SRC_DIR)frees_and_errors.c \

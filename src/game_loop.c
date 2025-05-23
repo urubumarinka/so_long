@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:11:20 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/21 16:47:08 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:15:26 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	try_move(t_data *data, int new_x, int new_y)
 {
 	char	next_tile;
 
-	ft_printf("try_move called with new_x=%d, new_y=%d\n", new_x, new_y);
 	if (new_x < 0 || new_x >= data->map.width
 		|| new_y < 0 || new_y >= data->map.height)
 		return ;
@@ -45,7 +44,7 @@ static void	try_move(t_data *data, int new_x, int new_y)
 	data->map.player.y = new_y;
 	data->map.grid[new_y][new_x] = 'P';
 	data->map.player.moves++;
-	ft_printf("Moves: %d\n", data->map.player.moves);
+	ft_printf("\rMoves: %d", data->map.player.moves);
 	// Draw both positions
 	draw_tile(data, new_y, new_x);
 	// Redraw the entire map

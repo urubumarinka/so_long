@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:45:56 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 17:34:38 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:51:07 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	simple_error_msg(const char *message)
 {
 	if (message)
-		ft_printf("Error: %s\n", message);
+		ft_printf("Error\n%s\n", message);
 	exit(EXIT_FAILURE);
 }
 
@@ -24,7 +24,7 @@ void	error_handler(const char *message, t_map *map)
 	if (map)
 		free_map(map);
 	if (message)
-		ft_printf("Error: %s\n", message);
+		ft_printf("Error\n%s\n", message);
 	exit(EXIT_FAILURE);
 }
 

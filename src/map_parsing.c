@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:24:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 17:49:02 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:53:35 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	load_map(char *file, t_map *map)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (simple_error_msg("file does not exist"), 0);
+		return (simple_error_msg("file does not exist or no permission"), 0);
 	line_count = count_lines(fd);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
