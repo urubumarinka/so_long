@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:24:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/19 19:50:22 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:50:48 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	fill_grid(int fd, t_map *map, int line_count)
 	{
 		map->grid[i] = ft_strtrim(line, "\n");
 		if (!map->grid[i])
-			return (0);
+			return (free_map(map), 0);
 		free(line);
 		line = NULL;
 		i++;
@@ -57,8 +57,6 @@ static int	fill_grid(int fd, t_map *map, int line_count)
 		map->width = ft_strlen(map->grid[0]);
 	else
 		map->width = 0;
-	printf("Width: %d\n", map->width);
-	printf("height: %d\n", map->height);
 	return (1);
 }
 
@@ -68,18 +66,18 @@ static int	map_validation(t_map *map, int line_count)
 
 	i = -1;
 	if (line_count < 3 || map->width < 3)
-		error_handler("Map is too small");
+		error_handler("Map is too small", map);
 	while (++i < line_count)
 		if ((int)ft_strlen(map->grid[i]) != map->width)
-			error_handler("Map is not rectangular");
+			error_handler("Map is not rectangular", map);
 	i = -1;
 	while (++i < map->width)
 		if (map->grid[0][i] != '1' || map->grid[line_count - 1][i] != '1')
-			error_handler("Map borders are not valid");
+			error_handler("Map borders are not valid", map);
 	i = -1;
 	while (++i < line_count)
 		if (map->grid[i][0] != '1' || map->grid[i][map->width - 1] != '1')
-			error_handler("Map borders are not valid");
+			error_handler("Map borders are not valid", map);
 	return (1);
 
 }
@@ -97,13 +95,13 @@ int	load_map(char *file, t_map *map)
 	if (fd < 0)
 		return (0);
 	if (!fill_grid(fd, map, line_count))
-		return (0);
+		return (free_map(map), 0);
 	close(fd);
 	if (!check_map_elements(map))
-		return (0);
+		return (free_map(map), 0);
 	if (!map_validation(map, line_count))
-		return (0);
+		return (free_map(map), 0);
 	if (!validate_map_path(map))
-		return (error_handler("Map is not valid"), 0);
+		return (error_handler("Map is not valid", map), 0);
 	return (1);
 }

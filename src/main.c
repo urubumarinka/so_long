@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/21 16:01:41 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:01:27 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (ac != 2)
-		error_handler("usage: ./so_long <map-file.ber>\n");
+		error_handler("usage: ./so_long <map-file.ber>\n", &data.map);
+	if(av[1])
 	if (!load_map(av[1], &data.map))
 	{
-		free_map(&data.map);
-		error_handler("Map loading failed\n");
+		destroy_win(&data);
+		error_handler("Map loading failed\n", &data.map);
 	}
 	data.ptr = mlx_init();
 	if (!data.ptr)

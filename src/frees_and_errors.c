@@ -6,15 +6,18 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:45:56 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/21 16:47:23 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:48:50 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	error_handler(const char *message)
+void	error_handler(const char *message, t_map *map)
 {
-	ft_printf("Error: %s\n", message);
+	if (map)
+		free_map(map);
+	if (message)
+		ft_printf("Error: %s\n", message);
 	exit(EXIT_FAILURE);
 }
 
@@ -22,14 +25,17 @@ void	free_map(t_map *map)
 {
 	int	i;
 
-	i = 0;
-	while (map->grid && map->grid[i])
+	if (map->grid)
 	{
-		free(map->grid[i]);
-		i++;
+		i = 0;
+		while (map->grid[i])
+		{
+			free(map->grid[i]);
+			i++;
+		}
+		free(map->grid);
+		map->grid = NULL;
 	}
-	free(map->grid);
-	map->grid = NULL;
 }
 
 void	free_images(t_data *data)

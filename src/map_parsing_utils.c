@@ -6,13 +6,13 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:52:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/21 12:20:28 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:53:05 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	update_flag(char ch, int *flag)
+static void	update_flag(char ch, int *flag, t_map *map)
 {
 	if (ch == 'P')
 		flag[0]++;
@@ -21,7 +21,7 @@ static void	update_flag(char ch, int *flag)
 	else if (ch == 'C')
 		flag[2]++;
 	else if (ch != '0' && ch != '1')
-		error_handler("Map with invalid character");
+		error_handler("Map with invalid character", map);
 }
 
 int	check_map_elements(t_map *map)
@@ -41,7 +41,7 @@ int	check_map_elements(t_map *map)
 		while (++j < map->width)
 		{
 			ch = map->grid[i][j];
-			update_flag(ch, flag);
+			update_flag(ch, flag, map);
 			if (ch == 'P')
 			{
 				map->player.x = j;
@@ -54,7 +54,7 @@ int	check_map_elements(t_map *map)
 	map->player.moves = 0;
 	map->player.collected = 0;
 	if (flag[0] != 1 || flag[1] != 1 || flag[2] < 1)
-		error_handler("Map must have 1 P, 1 E, and at least 1 C");
+		error_handler("Map must have 1 P, 1 E, and at least 1 C", map);
 	return (1);
 }
 

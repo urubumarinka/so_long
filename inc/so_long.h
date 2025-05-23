@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 15:02:49 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:48:15 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		check_map_elements(t_map *map);
 int		validate_map_path(t_map *map);
 
 //Free and error handling
-void	error_handler(const char *message);
+void	error_handler(const char *message, t_map *map);
 void	free_map(t_map *map);
 int		destroy_win(t_data *data);
 void	free_images(t_data *data);
