@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:48:45 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 15:48:15 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:35:51 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	error_handler(const char *message, t_map *map);
 void	free_map(t_map *map);
 int		destroy_win(t_data *data);
 void	free_images(t_data *data);
+void	simple_error_msg(const char *message);
 
 //Game Logic
 int		keypress(int keycode, t_data *data);

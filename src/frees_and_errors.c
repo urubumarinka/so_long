@@ -6,11 +6,18 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:45:56 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 15:48:50 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:34:38 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+void	simple_error_msg(const char *message)
+{
+	if (message)
+		ft_printf("Error: %s\n", message);
+	exit(EXIT_FAILURE);
+}
 
 void	error_handler(const char *message, t_map *map)
 {

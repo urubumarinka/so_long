@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:52:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 15:53:05 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:02:27 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ static void	flood_fill(char **copy_map, int x, int y, int *flag)
 	else if (copy_map[y][x] == 'C')
 		flag[0]++;
 	else if (copy_map[y][x] == 'E')
+	{
 		flag[1]++;
+		return ;
+	}
 	copy_map[y][x] = '1';
 	flood_fill(copy_map, x + 1, y, flag);
 	flood_fill(copy_map, x - 1, y, flag);

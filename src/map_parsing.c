@@ -6,7 +6,7 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:24:53 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 15:50:48 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:49:02 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	load_map(char *file, t_map *map)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (simple_error_msg("file does not exist"), 0);
 	line_count = count_lines(fd);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -97,9 +97,9 @@ int	load_map(char *file, t_map *map)
 	if (!fill_grid(fd, map, line_count))
 		return (free_map(map), 0);
 	close(fd);
-	if (!check_map_elements(map))
-		return (free_map(map), 0);
 	if (!map_validation(map, line_count))
+		return (free_map(map), 0);
+	if (!check_map_elements(map))
 		return (free_map(map), 0);
 	if (!validate_map_path(map))
 		return (error_handler("Map is not valid", map), 0);

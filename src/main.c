@@ -6,19 +6,42 @@
 /*   By: maborges <maborges@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:22:28 by maborges          #+#    #+#             */
-/*   Updated: 2025/05/23 16:01:27 by maborges         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:35:11 by maborges         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+static int	file_check(char *filepath)
+{
+	int	len;
+
+	if (!filepath)
+		return (0);
+	len = ft_strlen(filepath);
+	if (len <= 4)
+		return (0);
+	if (!ft_strnstr(filepath, ".ber", len))
+		return (0);
+	if (filepath[len - 4] != '.')
+		return (0);
+	if (filepath[len - 3] != 'b')
+		return (0);
+	if (filepath[len - 2] != 'e')
+		return (0);
+	if (filepath[len - 1] != 'r')
+		return (0);
+	return (1);
+}
 
 int	main(int ac, char **av)
 {
 	t_data	data;
 
 	if (ac != 2)
-		error_handler("usage: ./so_long <map-file.ber>\n", &data.map);
-	if(av[1])
+		simple_error_msg("usage: ./so_long <map-file.ber>\n");
+	if (!file_check(av[1]))
+		simple_error_msg("File does not exist or has wrong format\n");
 	if (!load_map(av[1], &data.map))
 	{
 		destroy_win(&data);
